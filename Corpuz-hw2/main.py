@@ -6,20 +6,22 @@ import time
 
 def buildArr() -> list:
     newArr = []
-    for i in range (10000):
+    # for i in range (10000):
+    for i in range(10):
         newArr.append(random.randint(1,10000))
     return newArr
 
 
-
+#done
 def bubble_sort(unsortedArr):
     start = time.perf_counter()
-    for i in range(0,len(unsortedArr)-1):
-        for j in range(1,len(unsortedArr)-1):
+    for i in range(0,len(unsortedArr)):
+        for j in range(i,len(unsortedArr)):
             if unsortedArr[i]>unsortedArr[j]:
-                swap(unsortedArr,i,j)
-                i += 1
-                j += 1
+                temp = unsortedArr[i]
+                unsortedArr[i] = unsortedArr[j]
+                unsortedArr[j] = temp
+
 
     return start
     for b in range(0,10):
@@ -43,7 +45,16 @@ def merge(unsortedArr, beg,mid,end):
 
 def sortTimer(unsortedArr):
 
-    print(f"bubble sort took {bubble_sort(unsortedArr)} secoonds to sort")
+    unsortCopy = unsortedArr[:]
+
+    print("UnsortedArr: ")
+    for i in range(0, 10):
+        print(unsortCopy[i])
+
+    print(" ")
+    print(f"bubble sort took {bubble_sort(unsortCopy)} seconds to sort")
+    for i in range(0,10):
+        print(unsortCopy[i])
 
 
 
