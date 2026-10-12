@@ -7,84 +7,103 @@ import time
 
 def buildArr() -> list:
     newArr = []
-    for i in range (10):
-    # for i in range(10):
+    # for i in range (10000):
+    for i in range(10):
         newArr.append(random.randint(1,10000))
     return newArr
 
+#done
 def builtInSort(unsortedArr):
-    unsortedCopy = unsortedArr[:]
 
-    return sorted(unsortedCopy)
+    return sorted(unsortedArr)
 
 #done
 def bubble_sort(unsortedArr):
-
-    unsortedCopy = unsortedArr[:]
-    for i in range(0,len(unsortedCopy)):
-        for j in range(i,len(unsortedCopy)):
-            if unsortedCopy[i]>unsortedCopy[j]:
-                temp = unsortedCopy[i]
-                unsortedCopy[i] = unsortedCopy[j]
-                unsortedCopy[j] = temp
+    for i in range(0,len(unsortedArr)):
+        for j in range(i,len(unsortedArr)):
+            if unsortedArr[i]>unsortedArr[j]:
+                temp = unsortedArr[i]
+                unsortedArr[i] = unsortedArr[j]
+                unsortedArr[j] = temp
 
 
-    return unsortedCopy
+    return unsortedArr
 
 #done
 def select_sort(unsortedArr):
     #first element is deemed the smallest, walk through the list and swap as needed
-    unsortedCopy = unsortedArr[:]
-    for i in range(0,len(unsortedCopy)):
+    for i in range(0,len(unsortedArr)):
         smallest = i
-        for j in range(i+1,len(unsortedCopy)):
-            if (unsortedCopy[j]< unsortedCopy[smallest]):
+        for j in range(i+1,len(unsortedArr)):
+            if (unsortedArr[j]< unsortedArr[smallest]):
                 smallest = j
 
-        temp = unsortedCopy[i]
-        unsortedCopy[i] = unsortedCopy[smallest]
-        unsortedCopy[smallest] = temp
+        temp = unsortedArr[i]
+        unsortedArr[i] = unsortedArr[smallest]
+        unsortedArr[smallest] = temp
 
-    return unsortedCopy
+    return unsortedArr
 
 #done
 def quick_sort(unsortedArr):
-    unsortedCopy = unsortedArr[:]
     sortedArr = []
-    for i in range(0,len(unsortedCopy)):
-        toAdd = min(unsortedCopy)
+    for i in range(0,len(unsortedArr)):
+        toAdd = min(unsortedArr)
         sortedArr.append(toAdd)
-        unsortedCopy.remove(toAdd)
+        unsortedArr.remove(toAdd)
 
     return sortedArr
 
 #done
 def insert_sort(unsortedArr):
-    unsortedCopy = unsortedArr[:]
-    for i in range(1,len(unsortedCopy)):
-        smallest = i
+    for i in range(1,len(unsortedArr)):
+        smallest = unsortedArr[i]
         j = i - 1
-        while j >= 0 and unsortedCopy[j] > unsortedCopy[smallest]:
-            unsortedCopy[j+1] = unsortedCopy[j]
+        while j >= 0 and smallest < unsortedArr[j]:
+            unsortedArr[j+1] = unsortedArr[j]
             j-=1
-        unsortedCopy[j+1] = unsortedCopy[i]
+        unsortedArr[j+1] = smallest
 
-    return unsortedCopy
+    return unsortedArr
+
+def merge(left, right):
+    temp = []
+
+    j = 0
+    i = j
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            temp.append(left[i])
+            i += 1
+
+        else:
+            temp.append(right[j])
+            j += 1
+
+        temp.extend(left[i:])
+        temp.extend(right[j:])
+
+        return temp
+
 def merge_sort(unsortedArr):
-    
-    begin = unsortedArr(min(unsortedArr))
-    end = unsortedArr.index(max(unsortedArr))
-    mid = len(unsortedArr) // 2
+    step = 1
+    length = len(unsortedArr)
 
-def merge(unsortedArr, beg,mid,end):
-    leftside = []
-    rightsize = []
+    while step < length:
+        for i in range(0, length, 2*step):
+            left = unsortedArr[i:i + step]
+            right = unsortedArr[i+step:i + 2*step]
 
-    for i in range (beg,mid):
-        leftside.append(unsortedArr[i])
+            merged = merge(left, right)
 
-    for i in range(mid+1,end):
-        rightside.append(unsortedArr[i])
+
+        for j, val in enumerate(merged):
+            unsortedArr[i+j] = val
+
+        step *= 2
+
+        return unsortedArr
 
 def sortTimer(unsortedArr):
 
@@ -97,9 +116,23 @@ def sortTimer(unsortedArr):
 
     print(" ")
 
+    # merge
+    merge_list = unsortCopy[:]
+    merge_start = time.perf_counter()
+    merge_sorted = merge_sort(merge_list)
+    merge_end = time.perf_counter()
+
+    print(f"Merge sort took: {merge_end - merge_start} seconds")
+
+    for i in range(0, 10):
+        print(merge_sorted[i])
+
+    print(" ")
+
     #built-in alg
+    built = unsortCopy[:]
     builtIn_start = time.perf_counter()
-    builtInSorted = builtInSort(unsortCopy)
+    builtInSorted = builtInSort(built)
     builtIn_end = time.perf_counter()
 
     print(f"Python built-in sort took: {builtIn_end - builtIn_start} seconds")
@@ -111,8 +144,9 @@ def sortTimer(unsortedArr):
 
 
     #bubble
+    bubble = unsortCopy[:]
     bubble_start = time.perf_counter()
-    bubble_sorted = bubble_sort(unsortCopy)
+    bubble_sorted = bubble_sort(bubble)
     bubble_end = time.perf_counter()
 
     print(f"Bubble sort took: {bubble_end - bubble_start} seconds")
@@ -123,8 +157,9 @@ def sortTimer(unsortedArr):
     print(" ")
 
     # quick
+    quick = unsortCopy[:]
     quick_start = time.perf_counter()
-    quick_sorted = quick_sort(unsortCopy)
+    quick_sorted = quick_sort(quick)
     quick_end = time.perf_counter()
 
     print(f"Quick sort took: {quick_end - quick_start} seconds")
@@ -134,8 +169,9 @@ def sortTimer(unsortedArr):
     print(" ")
 
     #select
+    select = unsortCopy[:]
     select_start = time.perf_counter()
-    ss_sorted = select_sort(unsortCopy)
+    ss_sorted = select_sort(select)
     select_end = time.perf_counter()
 
     print(f"Select sort took: {select_end - select_start} seconds")
@@ -147,14 +183,19 @@ def sortTimer(unsortedArr):
     print(" ")
 
     #insert
+    insert = unsortCopy[:]
     insert_start = time.perf_counter()
-    insert_sorted = insert_sort(unsortCopy)
+    insert_sorted = insert_sort(insert)
     insert_end = time.perf_counter()
 
     print(f"Insert sort took: {insert_end - insert_start} seconds")
 
     for i in range(0, 10):
         print(insert_sorted[i])
+
+
+
+
 
 if __name__ == '__main__':
     unsortedArr = buildArr()
