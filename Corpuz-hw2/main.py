@@ -7,9 +7,9 @@ import time
 
 def buildArr() -> list:
     newArr = []
-    # for i in range (10000):
-    for i in range(10):
-        newArr.append(random.randint(1,10000))
+
+    for i in range (10000):
+        newArr.append(random.randint(1,10001))
     return newArr
 
 #done
@@ -69,8 +69,8 @@ def insert_sort(unsortedArr):
 def merge(left, right):
     temp = []
 
+    i = 0
     j = 0
-    i = j
 
     while i < len(left) and j < len(right):
         if left[i] < right[j]:
@@ -81,10 +81,10 @@ def merge(left, right):
             temp.append(right[j])
             j += 1
 
-        temp.extend(left[i:])
-        temp.extend(right[j:])
+    temp.extend(left[i:])
+    temp.extend(right[j:])
 
-        return temp
+    return temp
 
 def merge_sort(unsortedArr):
     step = 1
@@ -98,12 +98,12 @@ def merge_sort(unsortedArr):
             merged = merge(left, right)
 
 
-        for j, val in enumerate(merged):
-            unsortedArr[i+j] = val
+            for j, val in enumerate(merged):
+                unsortedArr[i+j] = val
 
         step *= 2
 
-        return unsortedArr
+    return unsortedArr
 
 def sortTimer(unsortedArr):
 
@@ -111,8 +111,8 @@ def sortTimer(unsortedArr):
 
     #unsorted list
     print("UnsortedArr: ")
-    for i in range(0, 10):
-        print(unsortCopy[i])
+    # for i in range(0, 10):
+    #     print(unsortCopy[i])
 
     print(" ")
 
@@ -124,8 +124,8 @@ def sortTimer(unsortedArr):
 
     print(f"Merge sort took: {merge_end - merge_start} seconds")
 
-    for i in range(0, 10):
-        print(merge_sorted[i])
+    # for i in range(0, 10):
+    #     print(merge_sorted[i])
 
     print(" ")
 
@@ -137,8 +137,8 @@ def sortTimer(unsortedArr):
 
     print(f"Python built-in sort took: {builtIn_end - builtIn_start} seconds")
 
-    for i in range(0, 10):
-        print(builtInSorted[i])
+    # for i in range(0, 10):
+    #     print(builtInSorted[i])
 
     print(" ")
 
@@ -151,8 +151,8 @@ def sortTimer(unsortedArr):
 
     print(f"Bubble sort took: {bubble_end - bubble_start} seconds")
 
-    for i in range(0,10):
-        print(bubble_sorted[i])
+    # for i in range(0,10):
+    #     print(bubble_sorted[i])
 
     print(" ")
 
@@ -163,8 +163,8 @@ def sortTimer(unsortedArr):
     quick_end = time.perf_counter()
 
     print(f"Quick sort took: {quick_end - quick_start} seconds")
-    for i in range(0, 10):
-        print(quick_sorted[i])
+    # for i in range(0, 10):
+    #     print(quick_sorted[i])
 
     print(" ")
 
@@ -177,8 +177,8 @@ def sortTimer(unsortedArr):
     print(f"Select sort took: {select_end - select_start} seconds")
 
 
-    for i in range(0,10):
-        print(ss_sorted[i])
+    # for i in range(0,10):
+    #     print(ss_sorted[i])
 
     print(" ")
 
@@ -190,8 +190,8 @@ def sortTimer(unsortedArr):
 
     print(f"Insert sort took: {insert_end - insert_start} seconds")
 
-    for i in range(0, 10):
-        print(insert_sorted[i])
+    # for i in range(0, 10):
+    #     print(insert_sorted[i])
 
 
 
